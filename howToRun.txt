@@ -1,0 +1,15 @@
+cd /mnt/c/Users/AD/Desktop/BuyTeaCraft
+docker compose up -d
+
+Check if things run (active containers, ports, etc.): docker ps
+Kad zavrsis za taj dan : docker compose down
+i onda ponovo onu drugu komandu odozgo da ga podignes
+
+DESTROY DATABASE:
+    docker compose down -v
+BOOT IT BACK UP:
+    docker compose up -d
+
+REBUILD CONTAINER:
+   docker compose down
+   docker compose up -d --build
