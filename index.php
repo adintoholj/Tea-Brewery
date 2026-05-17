@@ -1,4 +1,5 @@
 <?php
+session_start();
 // credentials
 $host = 'db'; // The name of your database container
 $dbname = 'BuyTeaCraft_db';
@@ -37,7 +38,13 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
         <a class="navbar-brand fw-bold" href="index.php">🍃 BuyTeaCraft</a>
         
         <div>
-            <a href="login.php" class="btn btn-outline-light btn-sm fw-bold">Login</a>
+            <?php if (isset($_SESSION['username'])): ?>
+                <span class="text-light me-3">Hello, <strong><?php echo htmlspecialchars($_SESSION['username']); ?></strong>!</span>
+                <a href="logout.php" class="btn btn-outline-danger btn-sm fw-bold">Logout</a>
+            <?php else: ?>
+                <a href="login.php" class="btn btn-outline-light btn-sm fw-bold">Login</a>
+                <a href="register.php" class="btn btn-light btn-sm fw-bold">Register</a>
+            <?php endif; ?>
         </div>
     </div>
 </nav>

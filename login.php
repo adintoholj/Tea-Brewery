@@ -1,3 +1,49 @@
+<?php
+// Session start
+session_start();
+
+// Database connect
+$host = 'db';
+$dbname = 'BuyTeaCraft_db';
+$db_user = 'root';
+$db_pass = 'password';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $db_user, $db_pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
+
+$error_message = "";
+
+// Form submission check
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Look for the user in the database securely 
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+    $stmt->execute(['username' => $username]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Verify the user exists AND the password matches
+    if ($user && password_verify($password, $user['password'])) {
+        
+        // Assign id badge if success
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = $user['role']; // 'admin' or 'user'
+
+        // Back to store redirection
+        header("Location: index.php");
+        exit();
+    } else {
+        $error_message = "Invalid username or password.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +63,14 @@
             <h4 class="mb-0">🍃 Welcome Back</h4>
         </div>
         <div class="card-body p-4">
+            <!--Wrong password message-->
+            <?php if (!empty($error_message)): ?>
+                <div class="alert alert-danger py-2 text-center" role="alert">
+                    <?php echo htmlspecialchars($error_message); ?>
+                </div>
+            <?php endif; ?>
+
+            <form action="login.php" method="POST">
             <form action="login.php" method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label text-success fw-bold">Username</label>
@@ -30,7 +84,7 @@
             </form>
             
             <div class="text-center mt-3">
-                <small class="text-muted">Don't have an account? <a href="#" class="text-success text-decoration-none">Register here</a></small>
+                <small class="text-muted">Don't have an account? <a href="register.php" class="text-success text-decoration-none">Register here</a></small>
             </div>
             <div class="text-center mt-2">
                 <a href="index.php" class="text-secondary text-decoration-none small">← Back to Store</a>
