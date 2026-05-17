@@ -61,7 +61,12 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
                     
                     <div class="d-flex justify-content-between align-items-center">
                         <span class="fw-bold text-success">$<?php echo number_format($tea['price'], 2); ?></span>
-                        <button class="btn btn-sm btn-outline-success">Buy Now</button>
+    
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                            <a href="delete_tea.php?id=<?php echo $tea['id']; ?>" class="btn btn-sm btn-outline-danger fw-bold">Delete</a>
+                        <?php else: ?>
+                            <button class="btn btn-sm btn-outline-success fw-bold">Buy Now</button>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
