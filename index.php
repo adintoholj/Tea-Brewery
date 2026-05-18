@@ -65,9 +65,15 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
     <div class="text-center mb-4">
         <h2 class="fw-bold text-success">Freshly Brewed for You</h2>
         <p class="text-muted">Select from our premium database of teas or craft your own.</p>
-        <button type="button" class="btn btn-success btn-lg fw-bold shadow-sm mt-2" data-bs-toggle="modal" data-bs-target="#customTeaModal">
-            Open Custom Tea Builder
-        </button>
+        <?php if (isset($_SESSION['username'])): ?>
+            <button type="button" class="btn btn-success btn-lg fw-bold shadow-sm mt-2" data-bs-toggle="modal" data-bs-target="#customTeaModal">
+                Open Custom Tea Builder
+            </button>
+        <?php else: ?>
+            <a href="login.php" class="btn btn-secondary btn-lg fw-bold shadow-sm mt-2">
+                You need to Login to Build Custom Teas!
+            </a>
+        <?php endif; ?>
     </div>
 
     <div class="row row-cols-1 row-cols-md-2 g-3">
@@ -84,11 +90,13 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
         
                             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                                 <a href="delete_tea.php?id=<?php echo $tea['id']; ?>" class="btn btn-sm btn-outline-danger fw-bold">Delete</a>
-                            <?php else: ?>
+                            <?php elseif (isset($_SESSION['username'])): ?>
                                 <form action="add_to_cart.php" method="POST" class="m-0">
                                     <input type="hidden" name="tea_id" value="<?php echo $tea['id']; ?>">
                                     <button type="submit" class="btn btn-sm btn-outline-success fw-bold">Buy Now</button>
                                 </form>
+                            <?php else: ?>
+                                <a href="login.php" class="btn btn-sm btn-outline-secondary fw-bold">Login to Buy</a>
                             <?php endif; ?>
                         </div>
                     </div>

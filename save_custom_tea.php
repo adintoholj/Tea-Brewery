@@ -2,6 +2,11 @@
 session_start();
 header('Content-Type: application/json'); // Tell the browser we are sending JSON back
 
+if (!isset($_SESSION['username'])) {
+    echo json_encode(['success' => false, 'error' => 'You must be logged in to create teas.']);
+    exit();
+}
+
 // Read the JSON payload sent by JavaScript Fetch
 $jsonData = file_get_contents('php://input');
 $data = json_decode($jsonData, true);

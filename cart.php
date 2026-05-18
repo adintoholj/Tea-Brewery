@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// THE BOUNCER: In case of manual URL typing, If they don't have an ID badge, kick them to the login screen
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+}
+
 $host = 'db';
 $dbname = 'BuyTeaCraft_db';
 $user = 'root';
