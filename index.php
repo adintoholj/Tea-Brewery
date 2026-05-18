@@ -1,5 +1,6 @@
 <?php
 session_start();
+$cart_count = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
 // credentials
 $host = 'db'; // The name of your database container
 $dbname = 'BuyTeaCraft_db';
@@ -38,6 +39,8 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
         <a class="navbar-brand fw-bold" href="index.php">🍃 BuyTeaCraft</a>
         
         <div>
+            <a href="cart.php" class="btn btn-warning btn-sm fw-bold me-3">🛒 Cart (<?php echo $cart_count; ?>)</a>
+
             <?php if (isset($_SESSION['username'])): ?>
                 <span class="text-light me-3">Hello, <strong><?php echo htmlspecialchars($_SESSION['username']); ?></strong>!</span>
                 <a href="logout.php" class="btn btn-outline-danger btn-sm fw-bold">Logout</a>
@@ -48,6 +51,12 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
         </div>
     </div>
 </nav>
+
+<?php if (isset($_GET['checkout']) && $_GET['checkout'] === 'success'): ?>
+    <div class="container mt-3">
+        <div class="alert alert-success text-center fw-bold">🎉 Checkout successful! Your tea is brewing.</div>
+    </div>
+<?php endif; ?>
 
 <!--linked to the modal box that is hidden -->
 <div class="container mt-4 mb-4 text-center">
@@ -72,7 +81,11 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                             <a href="delete_tea.php?id=<?php echo $tea['id']; ?>" class="btn btn-sm btn-outline-danger fw-bold">Delete</a>
                         <?php else: ?>
-                            <button class="btn btn-sm btn-outline-success fw-bold">Buy Now</button>
+                            <!-- buy now -->
+                            <form action="add_to_cart.php" method="POST" class="m-0">
+                                <input type="hidden" name="tea_id" value="<?php echo $tea['id']; ?>">
+                                <button type="submit" class="btn btn-sm btn-outline-success fw-bold">Buy Now</button>
+                            </form>
                         <?php endif; ?>
                     </div>
                 </div>
