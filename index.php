@@ -60,15 +60,8 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
     </div>
 <?php endif; ?>
 
-<!--linked to the modal box that is hidden -->
-<div class="container mt-4 mb-4 text-center">
-    <button type="button" class="btn btn-success btn-lg fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#customTeaModal">
-        Open Custom Tea Builder
-    </button>
-</div>
-
 <div class="container mt-4 mb-5 glass-container">
-    
+    <!--linked to the modal box that is hidden -->
     <div class="text-center mb-4">
         <h2 class="fw-bold text-success">Freshly Brewed for You</h2>
         <p class="text-muted">Select from our premium database of teas or craft your own.</p>
@@ -78,40 +71,33 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
     </div>
 
     <div class="row row-cols-1 row-cols-md-2 g-3">
-        ...
-    </div> 
-
-</div>
-
-<div class="row row-cols-1 row-cols-md-2 g-3">
-    <!-- foreach -->
-    <?php foreach ($teas as $tea): ?>
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <span class="badge bg-success mb-2"><?php echo htmlspecialchars($tea['category']); ?></span>
-                    <h5 class="card-title fw-bold"><?php echo htmlspecialchars($tea['name']); ?></h5>
-                    <p class="card-text text-muted"><?php echo htmlspecialchars($tea['description']); ?></p>
-                    
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="fw-bold text-success">$<?php echo number_format($tea['price'], 2); ?></span>
-    
-                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                            <a href="delete_tea.php?id=<?php echo $tea['id']; ?>" class="btn btn-sm btn-outline-danger fw-bold">Delete</a>
-                        <?php else: ?>
-                            <!-- buy now -->
-                            <form action="add_to_cart.php" method="POST" class="m-0">
-                                <input type="hidden" name="tea_id" value="<?php echo $tea['id']; ?>">
-                                <button type="submit" class="btn btn-sm btn-outline-success fw-bold">Buy Now</button>
-                            </form>
-                        <?php endif; ?>
+        <?php foreach ($teas as $tea): ?>
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2"><?php echo htmlspecialchars($tea['category']); ?></span>
+                        <h5 class="card-title fw-bold"><?php echo htmlspecialchars($tea['name']); ?></h5>
+                        <p class="card-text text-muted"><?php echo htmlspecialchars($tea['description']); ?></p>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-success">$<?php echo number_format($tea['price'], 2); ?></span>
+        
+                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                <a href="delete_tea.php?id=<?php echo $tea['id']; ?>" class="btn btn-sm btn-outline-danger fw-bold">Delete</a>
+                            <?php else: ?>
+                                <form action="add_to_cart.php" method="POST" class="m-0">
+                                    <input type="hidden" name="tea_id" value="<?php echo $tea['id']; ?>">
+                                    <button type="submit" class="btn btn-sm btn-outline-success fw-bold">Buy Now</button>
+                                </form>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div> 
 
-</div> 
+</div>
 
 <!--Bootstrap modals-->
 
