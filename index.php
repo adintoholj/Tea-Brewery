@@ -169,8 +169,8 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
             <div class="row text-center text-md-start">
             
                 <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 fw-bold text-warning">🍃 BuyTeaCraft</h5>
-                    <p>Delivering the finest artisan teas and custom blends right to your cup. Built with PHP, Docker, and a whole lot of caffeine.</p>
+                    <h5 class="text-uppercase mb-4 fw-bold text-warning">ABOUT</h5>
+                    <p>Delivering the finest teas and custom blends right to your cup. Built with a whole lot of caffeine.</p>
                 </div>
 
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
@@ -182,7 +182,7 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
 
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                     <h5 class="text-uppercase mb-4 fw-bold text-warning">Contact</h5>
-                    <p>📍 123 Brewery Lane, Tea City</p>
+                    <p>📍 777 Brewery Lane, Gold Coast AUS</p>
                     <p>✉️ info@buyteacraft.com</p>
                     <p>📞 +1 234 567 8900</p>
                 </div>
@@ -191,7 +191,7 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
             <hr class="mb-4">
             <div class="row align-items-center">
                 <div class="col-md-7 col-lg-8">
-                    <p>© 2026 BuyTeaCraft. Final Project Submission.</p>
+                    <p>© 2026 BuyTeaCraft</p>
                 </div>
             </div>
         </div>
