@@ -27,6 +27,8 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
     <title>BrewLab | Custom Teas</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
     <style>
         body { background-color: #f8fff9; } 
         .navbar { background-color: #2d6a4f !important; } 
@@ -63,6 +65,22 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
     <button type="button" class="btn btn-success btn-lg fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#customTeaModal">
         Open Custom Tea Builder
     </button>
+</div>
+
+<div class="container mt-4 mb-5 glass-container">
+    
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-success">Freshly Brewed for You</h2>
+        <p class="text-muted">Select from our premium database of teas or craft your own.</p>
+        <button type="button" class="btn btn-success btn-lg fw-bold shadow-sm mt-2" data-bs-toggle="modal" data-bs-target="#customTeaModal">
+            Open Custom Tea Builder
+        </button>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 g-3">
+        ...
+    </div> 
+
 </div>
 
 <div class="row row-cols-1 row-cols-md-2 g-3">
@@ -151,6 +169,39 @@ $teas = $stmt->fetchAll(PDO::FETCH_ASSOC); // $teas array
             </div>
         </div>
     </div>
+
+    <footer class="text-white pt-5 pb-4 mt-auto" style="background-color: #1b4332;">
+        <div class="container text-center text-md-start">
+            <div class="row text-center text-md-start">
+            
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-warning">🍃 BuyTeaCraft</h5>
+                    <p>Delivering the finest artisan teas and custom blends right to your cup. Built with PHP, Docker, and a whole lot of caffeine.</p>
+                </div>
+
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-warning">Shop</h5>
+                    <p><a href="#" class="text-white text-decoration-none">Green Teas</a></p>
+                    <p><a href="#" class="text-white text-decoration-none">Black Teas</a></p>
+                    <p><a href="#" class="text-white text-decoration-none">Herbal Blends</a></p>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-warning">Contact</h5>
+                    <p>📍 123 Brewery Lane, Tea City</p>
+                    <p>✉️ info@buyteacraft.com</p>
+                    <p>📞 +1 234 567 8900</p>
+                </div>
+            
+            </div>
+            <hr class="mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-7 col-lg-8">
+                    <p>© 2026 BuyTeaCraft. Final Project Submission.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

@@ -1,0 +1,26 @@
+/* The main background image */
+body { 
+    background-image: url('bg.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Keeps the background still when scrolling */
+    margin: 0;
+    padding: 0;
+    background-color: #f8fff9; /* Fallback color just in case the image loads slow */
+} 
+
+/* Navbar override */
+.navbar { 
+    background-color: #1b4332 !important; 
+} 
+
+/* The 'Glass' container that holds the content */
+.glass-container {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    min-height: 80vh;
+}
